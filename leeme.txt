@@ -1,0 +1,40 @@
+- Agregar al php.ini del apache
+[PHP_SQLSRV]
+extension=php_sqlsrv_56_ts.dll
+extension=php_pdo_sqlsrv_56_ts.dll
+
+- Habiliar la conexión para SQLSERVER
+https://docs.microsoft.com/en-us/sql/relational-databases/sql-server-configuration-manager
+1. Habilitar el usuario sa
+2. Modificar el pass del usuario sa
+3. Habilitar el login por autenticación
+4 Ejecutar SQLServerManager13.msc
+5 Habilitatr el acceso de TCP/IP
+
+- Inicializar proyecto en Git
+# git init
+# git config --global user.email "you@example"
+# git config --global user.name "Your Name"
+# git remote add origin https://gitlab.com/jfarfandba/pmlinks.git
+
+- Uso del GITLAB
+0. git pull origin master
+1. git add .
+2. git commit -m "descripción del commit"
+3. git push origin master
+
+- Comando Larvel
+php artisan make:model NombreModelo
+php artisan make:controller ruta/controlador/NombreController --resource
+
+- Colores
+Blanco: #FFFFFF
+Azul: #004F93
+Naranja: #F0901B
+Gris oscuro: #65656C
+
+#Códigos de prueba
+Operador: 144503 (IdEmpleado: 154)
+Operador: 144529 (IdEmpleado: 258)
+Unidad: 41001
+Servicio: 1010

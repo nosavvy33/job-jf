@@ -1,0 +1,187 @@
+/*
+ * It is advised not to edit the smartadmin_production.css
+ * as this will override any changes you make in the 
+ * later versions of this theme. 
+ * 
+ * We advise that you use use this CSS to override 
+ * SmartAdmin styles. 
+ * 
+ * Rename the stylesheet to whatever your liking so it will stay
+ * unique to you with each update of SmartAdmin.
+ */
+
+/*
+ * INDEX
+ * 
+ * - HTML
+ * - BODY
+ * - CUSTOM STYLES
+ */
+ .fuelux .wizard {
+    border: none;
+    box-shadow: none;
+    background: none;
+}
+.fuelux .borderline {
+	background: #f9f9f9;
+	border: 1px solid #cccccc;
+	height: 47px;
+	overflow: hidden;
+	width: auto;
+	border-radius: 7px;
+}
+.fuelux .wizard .actions {
+    border-right: 1px solid #d4d4d4;
+    border-bottom: 1px solid #d4d4d4;
+    border-radius: 7px;
+    line-height: 45px;
+}
+/*
+    Naranja =>  #F0901B;
+    Azul    =>  #004F93;
+    Gris    =>  #65656C;
+*/
+#logo {
+    margin-top: 2px;
+}
+.smart-style-2 #ribbon {
+    border-bottom: 1px solid #dfdfdf;
+}
+.smart-style-2 #left-panel {
+    padding-right: 2px;
+    padding-left: 0;
+}
+img.online {
+    border-left-color: #f0901b!important;
+}
+.smart-style-2 nav ul ul {
+    background: rgba(255, 254, 254, 0.6);
+}
+
+.smart-style-2 nav ul .active > a, .smart-style-2 nav ul li.open > a, .smart-style-2 nav ul li.open > a b {
+    color: #005884 !important;
+    background: #dfebf5;
+}
+.panel-default>.panel-heading {
+    color: #FFF;
+    /*background-color: #F0901B;*/
+    background-color: #014f93;
+    /*border-color: #F0901B;*/
+    border-color: #012c52;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+.fuelux .wizard ul li.active {
+    color: #FFF;
+    background: #004F93;
+}
+.fuelux .wizard ul li.active .chevron:before {
+    border-left: 14px solid #004F93;
+}
+/*
+.fuelux .wizard ul li {
+    color: #FFF;
+    background: #65656C;
+}
+.fuelux .wizard ul li .chevron:before {
+    border-left: 14px solid #65656C;
+}
+*/
+.fuelux .wizard ul li .badge {
+    background: #65656C;
+    border: 1px solid #FFF;
+}
+.smart-style-2 .btn-success {
+    background-color: #189638;
+}
+.smart-style-2 .btn-primary.active, .smart-style-2 .btn-primary:active, .smart-style-2 .btn-primary:focus, .smart-style-2 .btn-primary:hover, .smart-style-2 .open .dropdown-toggle.btn-primary {
+    background-color: #004F93;
+}
+.smart-style-2 .btn-primary, .smart-style-2 .smart-form .button {
+    background-color: #004F93;
+}
+
+.smart-style-2 #header, .smart-style-2 .page-footer, .smart-style-2 .superbox-show {
+    background-color: #004f93;
+}
+
+.hidden-menu #hide-menu > :first-child > a {
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #64a7fd), color-stop(100%, #2a73ce));
+    background-image: -webkit-linear-gradient(to bottom, #64a7fd 0, #2a73ce 100%);
+    background-image: -o-linear-gradient(to bottom, #64a7fd 0, #2a73ce 100%);
+    background-image: -ms-linear-gradient(to bottom, #64a7fd 0, #2a73ce 100%);
+    background-image: linear-gradient(to bottom, #64a7fd 0, #2a73ce 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#64a7fd', endColorstr='#2a73ce', GradientType=0);
+    border-color: #2a73ce;
+}
+
+:-webkit-full-screen #fullscreen > :first-child > a {
+    background-color: #e8e8e8;
+    background-image: -moz-linear-gradient(top, #64a7fd 0, #2a73ce 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #64a7fd), color-stop(100%, #2a73ce));
+    background-image: -webkit-linear-gradient(to bottom, #64a7fd 0, #2a73ce 100%);
+    background-image: -o-linear-gradient(to bottom, #64a7fd 0, #2a73ce 100%);
+    background-image: -ms-linear-gradient(to bottom, #64a7fd 0, #2a73ce 100%);
+    background-image: linear-gradient(to bottom, #64a7fd 0, #2a73ce 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#64a7fd', endColorstr='#2a73ce', GradientType=0);
+    border-color: #2a73ce;
+}
+
+.page-title {
+    font-weight: bold;
+}
+
+.jarviswidget > header {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.jarviswidget .widget-body {
+    border-bottom-left-radius: 7px !important;
+    border-bottom-right-radius: 7px !important;
+}
+
+.panel {
+    border-radius: 7px;
+}
+
+.form-control {
+    border-radius: 7px !important;
+}
+
+.input-group .form-control[type="text"], .input-group .form-control[type="number"], .input-group .form-control[type="date"], .input-group .form-control[type="time"], .input-group .form-control[type="search"] {
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
+
+.input-group-addon {
+    border-radius: 7px;
+}
+
+.btn {
+    border-radius: 7px !important;
+}
+
+.jarviswidget-color-darken > header {
+    border-color: #F0901B !important;
+    background: #F0901B !important;
+}
+#panelGeneral .panel {
+    margin-bottom: 18px;
+    background-color: #fff;
+    border: 5px solid transparent;
+    border-radius: 7px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+#panelGeneral .panel-default {
+    border-color: #ddd;
+    border-radius: 7px;
+}
+#panelGeneral .panel-footer {
+    background-color: #F0901B;
+    color: #FFF;
+    font-weight: bold;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
