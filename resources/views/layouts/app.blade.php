@@ -178,9 +178,13 @@
                 </ul>
 
                 <!-- logout button -->
+                
                 <div id="logout" class="btn-header transparent pull-right">
-                    <span> <a href="login.html" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> </span>
+                    <span> <!--<a href="logout" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a>-->
+                        <form action="logout" method="POST">{{csrf_field()}}<button class="btn-header" type="submit"><i class="fa fa-sign-out"></i></button></form>
+                    </span>
                 </div>
+          
                 <!-- end logout button -->
 
                 <!-- search mobile button (this is hidden till mobile view port) -->

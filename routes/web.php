@@ -10,11 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
 
+//Auth::routes();
+    //Route::get('login', ['as' => 'login', 'uses' => 'App\Modules\Admin\Controllers\AdminUserController@loginAdminUser']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -37,7 +38,7 @@ Route::post('/operaciones/danioscierre/registrar', 'Operaciones\FormatoDaniosCon
 Route::post('/operaciones/danios/registrar', 'Operaciones\FormatoDaniosController@regdanios');
 
 //Pruebas
-Route::get('/operaciones/rnovedadop', 'Operaciones\PruebaRNovedadOpe@form');
+//Route::get('/operaciones/rnovedadop', 'Operaciones\PruebaRNovedadOpe@form');
 /*Route::get('/pruebas', 'Operaciones\FormatoDaniosController@prueba')->name('prueba');
 Route::post('/empleado', 'Operaciones\FormatoDaniosController@empleado')->name('empleado');
 Route::post('/bus', 'Operaciones\FormatoDaniosController@bus')->name('bus');
@@ -77,3 +78,4 @@ Route::post('/logistica/proveedores/mantenimiento/guardar','Logistica\Proveedore
 Route::get('/logistica/proveedores/mantenimiento/mostrar/{id}','Logistica\ProveedoresController@mostrar');
 Route::post('/logistica/proveedores/mantenimiento/editar','Logistica\ProveedoresController@editar');
 Route::get('/logistica/proveedores/mantenimiento/eliminar/{id}','Logistica\ProveedoresController@eliminar');
+

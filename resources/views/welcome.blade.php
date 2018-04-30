@@ -76,13 +76,14 @@ html, body{
             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm"></div>
             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                 <div class="well no-padding">
-	                <form action="home" method="post" id="login-form" class="smart-form client-form">
+	                <form action="login" method="post" id="login-form" class="smart-form client-form">
+                                                {{ csrf_field() }}
                         <header><h1 align="center">Iniciar sesión</h1></header>
                         <fieldset>
                             <section>
                                 <label class="label">Usuario</label>
                                 <label class="input"> <i class="icon-append fa fa-user"></i>
-	                                <input type="text" name="email">
+	                                <input type="text" name="LoginName">
                                     <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Por favor ingresar el nombre de tu usuario</b></label>
                             </section>
                             <section>

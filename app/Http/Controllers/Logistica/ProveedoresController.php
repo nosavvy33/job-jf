@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Logistica;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Ubigeo;
 use App\Models\Rubro;
@@ -12,6 +13,8 @@ class ProveedoresController extends Controller{
     var $ubigeo;
     var $rubro;
     public function __construct(){
+        $this->middleware('auth');
+
     	$this->ubigeo = new Ubigeo;
     	$this->rubro = new Rubro;
     }
