@@ -1,0 +1,11 @@
+Cada vista tendrá un ID, el cuál será el IdOpcion dentro de la BD
+esto, más el ID del usuario servirán para conocer los permisos
+que tenga cada usuario en cada vista que visite
+
+quedando en SQL, una sentencia similar : 
+
+ select IndBotonCrear, IndBotonEliminar, IndBotonVisualizar , IndBotonImprimir, IndBotonExportar from ssperfilopcion where IdPerfil = (select IdPerfil from ssusuarioperfil where IdUsuario = (select IdUsuario from ssusuario where LoginName = 'ENDIRAGT')) AND IdOpcion = 40;
+
+donde IdOpcion = 40 pertenece a la vista que retorna el siguiente route:
+	/home#logistica/proveedores/mantenimiento
+

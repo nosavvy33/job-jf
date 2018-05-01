@@ -78,9 +78,16 @@
 
 			<div role="content">
 				<div class="widget-body">
-					<p align="right"><button type="button" class="btn btn-success btnNuevo">
+					
+
+					@if ($btncrear === 'S')
+					<p align="right">
+						<button type="button" class="btn btn-success btnNuevo">
 						<span class="glyphicon glyphicon-plus"></span> Nuevo
 					</button></p>
+					@endif
+
+
 					<table class="table table-bordered">
 						<thead>
 							<tr>
