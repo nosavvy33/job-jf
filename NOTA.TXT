@@ -1,4 +1,4 @@
-Cada vista tendrá un ID, el cuál será el IdOpcion dentro de la BD
+		1		Cada vista tendrá un ID, el cuál será el IdOpcion dentro de la BD
 esto, más el ID del usuario servirán para conocer los permisos
 que tenga cada usuario en cada vista que visite
 
@@ -9,3 +9,14 @@ quedando en SQL, una sentencia similar :
 donde IdOpcion = 40 pertenece a la vista que retorna el siguiente route:
 	/home#logistica/proveedores/mantenimiento
 
+
+		2		El usuario ENDIRAGT con password 123456 tiene como IdPerfil = 2
+el cual NO tiene permisos de CREAR nuevos registros de proveedores ni de IMPRIMIR (esta opcion no existe en la vista 40) por lo que no podrá visualizar el boton de CREAR en esa vista
+
+	Este cambio se realizó en la bd directamente, se proyecta que los permisos serán otorgados y revocados desde una interfaz gráfica más adelante en el proyecto
+
+	Sentencia SQL para modificar los permisos dentro de la bd
+
+	update ssperfilopcion set IndBotonCrear = 'N' where IdOpcion = 40 and IdPerfil = 2;
+
+	Otros usuarios, como por ejemplo SYSTEM 123456 y BETHBS 123456, sí podrán visualizar este botón y crear nuevos registros en tal vista debido a que SÍ tienen tales permisos
