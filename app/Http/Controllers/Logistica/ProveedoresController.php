@@ -56,7 +56,8 @@ class ProveedoresController extends Controller{
     	return view("logistica/proveedores/nuevo",$datos);
     }
     public function guardar(Request $request){
-    	print_r($request->all());
+    	//print_r($request->all());
+        echo 'Tipo de proveedor (Juridico = 1 / Natural = 2) == '.$request->input('tipo');
     }
     public function mostrar($id){
     	
