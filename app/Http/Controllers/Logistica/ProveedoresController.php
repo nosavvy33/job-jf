@@ -57,7 +57,14 @@ class ProveedoresController extends Controller{
     }
     public function guardar(Request $request){
     	//print_r($request->all());
-        echo 'Tipo de proveedor (Juridico = 1 / Natural = 2) == '.$request->input('tipo');
+        //echo 'Tipo de proveedor (Juridico = 1 / Natural = 2) == '.$request->input('tipo');
+        $all_tels =  $request->input("all_tels");
+        $individual_tels = explode("/", $all_tels);
+        $to_print ="";
+        foreach ($individual_tels as $one) {
+            $to_print = $to_print.strval($one)."\n";
+        }
+        echo $to_print;
     }
     public function mostrar($id){
     	
