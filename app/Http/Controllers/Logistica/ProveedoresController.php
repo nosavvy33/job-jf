@@ -56,9 +56,44 @@ class ProveedoresController extends Controller{
     	return view("logistica/proveedores/nuevo",$datos);
     }
     public function guardar(Request $request){
+        //OBTENER CELUALRES INDIVIDUALMENTE
+        $all_cels =  $request->input("all_cels");
+        $re = '/\d\.\d+\d\:/m';
+        preg_match_all($re, $all_cels, $matches, PREG_SET_ORDER, 0);
+        $y = "";
+        foreach ($matches as $key => $value) {
+            $value[0] = preg_replace("/.\d+\d:/m", "", strval($value[0]));
+            $y = $y.strval($value[0]);
+        }
+        
+        $num_cels_x_con = array();
+        for($q = 1 ; $q <= strlen($y); $q++){
+            array_push($num_cels_x_con, substr_count($y, $q));
+        }
+       array_pop($num_cels_x_con);
+       
+        $reg = '/\d+\d/m';
+        preg_match_all($reg, $all_cels, $cels, PREG_SET_ORDER, 0);        
+        $every_cel = array();
+        foreach ($cels as $key => $value) {
+            array_push($every_cel, $value[0]);
+        }
+        $c = 0;
+        $cont_with_cel = array();
+        for($i = 0; $i < $request->input("total_contacts") ; $i++){
+            $celxcon = "";
+            for($k=0;$k<$num_cels_x_con[$i];$k++){
+                $celxcon = $celxcon.strval($every_cel[$c]).".";
+                $c++;
+            }
+            array_push($cont_with_cel, $celxcon);
+        }
+        print_r($cont_with_cel);
+
+        // OBTENER TELEFONOS INDIVIDUALMENTE
         $all_tels =  $request->input("all_tels");
         $re = '/\d\.\d+\d\:/m';
-        echo $all_tels;
+        //echo $all_tels;
         preg_match_all($re, $all_tels, $matches, PREG_SET_ORDER, 0);
         $x = "";
         foreach ($matches as $key => $value) {
@@ -70,8 +105,8 @@ class ProveedoresController extends Controller{
         for($z = 1 ; $z <= strlen($x); $z++){
             array_push($num_tels_x_con, substr_count($x, $z));
         }
-       array_pop($num_tels_x_con);
-
+       //array_pop($num_tels_x_con);
+        //print_r($num_tels_x_con);
         
         
         $reg = '/\d+\d/m';

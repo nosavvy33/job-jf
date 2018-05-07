@@ -360,7 +360,7 @@
 									</select>
 								</td>
 								<td id="tel_numeros"><div id="telefono"><input type="text" name="telefonoContacto[]" class="form-control inTel" data-owner="1" /><button type="button" class="addTel"  data-owner="1"><i class="glyphicon glyphicon-plus"/></button><button type="button" class="delTel" data-owner="1"><i class="glyphicon glyphicon-minus"/></button></div></td>
-								<td><input type="text" name="celularContacto[]" class="form-control" /></td>
+								<td id="cel_numeros"><div id="celular"><input type="text" name="celularContacto[]" class="form-control inCel" data-owner="1" /><button type="button" class="addCel"  data-owner="1"><i class="glyphicon glyphicon-plus"/></button><button type="button" class="delCel" data-owner="1"><i class="glyphicon glyphicon-minus"/></button></div></td>
 								<td><input type="text" name="emailContacto[]"  class="form-control" /></td>
 								<td>
 									<button type="button" class="btn btn-danger btnEliminarFila">
@@ -483,7 +483,39 @@
    			console.log("index : "+index+"\t valor : "+value.tagName);
    		});*/
    	});
+   	$(document).on("click",".addCel",function(event){
+   		//console.log("DATA OWNER : "+$(this).data('owner'));
+   		let data_owner = $(this).data("owner");
+   		console.log(data_owner);
+   		data_owner = data_owner.toString();
+   		$(this).before("<input type='text' name='telefonoContacto[]' class='form-control inCel' data-owner='"+data_owner+"' />");
+   		//let arr = $("#filaContacto[data-nro="+data_owner+"]").children().eq(5); 
+   		let arr = $("#filaContacto"+data_owner+"").children().eq(6); 
+   		   		data_owner = data_owner.toString();
+
+   		//Obtiene el TD en la posición de Teléfono
+   		//console.log("etiqueta : "+arr[0].tagName);
+   		//console.log("etiqueta : "+$(arr).prop("tagName"));
+
+   		//Obtiene el DIV dentro del TD Teléfono
+   		//let arr2 = $(arr).children().filter(":not(input[type=text])");
+   		let arr2 = $(arr).children().filter("div");
+   		//Obtiene los inputs dentro del DIV dentro del TD Telefono
+   		let arr3 = $(arr2).children().filter("input");
+		jQuery.each(arr3,function(index,value){
+   			//console.log("index : "+index+"\t valor : "+value.tagName+"\t valor input : "+value.value);
+   		});
+   		/*jQuery.each(arr2,function(index,value){
+   			console.log("index : "+index+"\t valor : "+value.tagName);
+   		});*/
+   		/*jQuery.each(arr,function(index,value){
+   			console.log("index : "+index+"\t valor : "+value.tagName);
+   		});*/
+   	});
 	$(document).on("click",".delTel",function(event){
+		$(event.target).prev().prev().remove();
+   	});
+   	$(document).on("click",".delCel",function(event){
 		$(event.target).prev().prev().remove();
    	});
    	
@@ -494,17 +526,26 @@
     });*/
 
     $("#next").click(function(){
-    	let hijos = $("#tablaDataContacto").find(".inTel");
+    	let hijosTel = $("#tablaDataContacto").find(".inTel");
+    	let hijosCel = $("#tablaDataContacto").find(".inCel");
     	let nro_contactos = $("#tablaDataContacto .filaContact").length;
     	$("#total_contacts").val(nro_contactos);
     	let get_all_tels = "";
+    	let get_all_cels = "";
     	let ind;
-    	jQuery.each(hijos, function(index,value){
+    	jQuery.each(hijosTel, function(index,value){
     		//console.log("index : "+index+"\t valor : "+value.value+"\t owner : "+$(value).data('owner'));
     		//ind = $(value).data('owner');
     		get_all_tels += $(value).data('owner')+"."+value.value+":";
     	});
+    	jQuery.each(hijosCel, function(index,value){
+    		//console.log("index : "+index+"\t valor : "+value.value+"\t owner : "+$(value).data('owner'));
+    		//ind = $(value).data('owner');
+    		get_all_cels += $(value).data('owner')+"."+value.value+":";
+    	});
+    	console.log(get_all_cels);
     	$("#all_tels").val(get_all_tels);
+    	$("#all_cels").val(get_all_cels);
     	//console.log(get_all_tels);
     	$.post("/logistica/proveedores/mantenimiento/guardar",$("#formu").serialize(), function(data){
     			alert(data);
@@ -562,7 +603,7 @@
     		let nro = nroFilaContacto++;
     		nro = nro.toString();
     		console.log(nro);
-    		let html = '<tr id="filaContacto'+nro+'" class="filaContact">								<td><input type="text" name="nombreContacto[]" class="form-control" /></td>								<td><input type="text" name="apellidoPaternoContacto[]" class="form-control" /></td>								<td><input type="text" name="apellidoMaternoContacto[]" class="form-control" /></td><td>									<select class="form-control cmbArea">										<option value="0">Seleccionar una opción</option>										<option value="1">GERENCIA</option>										<option value="2">CRÉDITO Y COBRANZAS</option>										<option value="3">CONTABILIDAD Y FINANZAS</option>										<option value="4">OPERACIONES</option>										<option value="5">LOGISTICA</option>										<option value="6">VENTAS</option>										<option value="7">ADMINISTRACION</option>										<option value="8">FINANZAS</option>										<option value="9">MANTENIMIENTO</option>										<option value="10">RECURSOS HUMANOS</option>										<option value="11">LEGAL</option>										<option value="12">SISTEMAS</option>										<option value="13">LAVADO</option>									</select>								</td>								<td class="filaComboCargo">									<select class="form-control cmbCargo" disabled="disabled">										<option value="0">Seleccionar una opción</option>									</select>								</td>								<td id="tel_numeros"><div id="telefono"><input type="text" name="telefonoContacto[]" data-owner="'+nro+'" class="form-control inTel" /><button type="button" class="addTel"  data-owner="'+nro+'"><i class="glyphicon glyphicon-plus"/></button><button type="button"  class="delTel"  data-owner="'+nro+'"><i class="glyphicon glyphicon-minus"/></button></div></td>								<td><input type="text" name="celularContacto[]" class="form-control" /></td>								<td><input type="text" name="emailContacto[]"  class="form-control" /></td>								<td>									<button type="button" class="btn btn-danger btnEliminarFila">										<span class="glyphicon glyphicon-trash"></span>									</button>								</td>							</tr>'
+    		let html = '<tr id="filaContacto'+nro+'" class="filaContact">								<td><input type="text" name="nombreContacto[]" class="form-control" /></td>								<td><input type="text" name="apellidoPaternoContacto[]" class="form-control" /></td>								<td><input type="text" name="apellidoMaternoContacto[]" class="form-control" /></td><td>									<select class="form-control cmbArea">										<option value="0">Seleccionar una opción</option>										<option value="1">GERENCIA</option>										<option value="2">CRÉDITO Y COBRANZAS</option>										<option value="3">CONTABILIDAD Y FINANZAS</option>										<option value="4">OPERACIONES</option>										<option value="5">LOGISTICA</option>										<option value="6">VENTAS</option>										<option value="7">ADMINISTRACION</option>										<option value="8">FINANZAS</option>										<option value="9">MANTENIMIENTO</option>										<option value="10">RECURSOS HUMANOS</option>										<option value="11">LEGAL</option>										<option value="12">SISTEMAS</option>										<option value="13">LAVADO</option>									</select>								</td>								<td class="filaComboCargo">									<select class="form-control cmbCargo" disabled="disabled">										<option value="0">Seleccionar una opción</option>									</select>								</td>								<td id="tel_numeros"><div id="telefono"><input type="text" name="telefonoContacto[]" data-owner="'+nro+'" class="form-control inTel" /><button type="button" class="addTel"  data-owner="'+nro+'"><i class="glyphicon glyphicon-plus"/></button><button type="button"  class="delTel"  data-owner="'+nro+'"><i class="glyphicon glyphicon-minus"/></button></div></td>								<td id="cel_numeros"><div id="celular"><input type="text" name="celularContacto[]" data-owner="'+nro+'" class="form-control inCel" /> <button type="button" class="addCel"  data-owner="'+nro+'"><i class="glyphicon glyphicon-plus"/></button><button type="button" class="delCel" data-owner="'+nro+'"><i class="glyphicon glyphicon-minus"/></button> </div></td>								<td><input type="text" name="emailContacto[]"  class="form-control" /></td>								<td>									<button type="button" class="btn btn-danger btnEliminarFila">										<span class="glyphicon glyphicon-trash"></span>									</button>								</td>							</tr>'
     		$('#tablaData'+ref).append(html);
     	});
     	$("tbody").on("change",".cmbArea",function() {
