@@ -361,7 +361,7 @@
 								</td>
 								<td id="tel_numeros"><div id="telefono"><input type="text" name="telefonoContacto[]" class="form-control inTel" data-owner="1" /><button type="button" class="addTel"  data-owner="1"><i class="glyphicon glyphicon-plus"/></button><button type="button" class="delTel" data-owner="1"><i class="glyphicon glyphicon-minus"/></button></div></td>
 								<td id="cel_numeros"><div id="celular"><input type="text" name="celularContacto[]" class="form-control inCel" data-owner="1" /><button type="button" class="addCel"  data-owner="1"><i class="glyphicon glyphicon-plus"/></button><button type="button" class="delCel" data-owner="1"><i class="glyphicon glyphicon-minus"/></button></div></td>
-								<td><input type="text" name="emailContacto[]"  class="form-control" /></td>
+								<td id="correos"><div id="correo"><input type="text" name="emailContacto[]"  class="form-control inEmail" data-owner="1"/><button type="button" class="addEmail"  data-owner="1"><i class="glyphicon glyphicon-plus"/></button><button type="button" class="delEmail" data-owner="1"><i class="glyphicon glyphicon-minus"/></button></div></td>
 								<td>
 									<button type="button" class="btn btn-danger btnEliminarFila">
 										<span class="glyphicon glyphicon-trash"></span>
@@ -441,6 +441,7 @@
 				<input type="hidden" name="all_tels" id="all_tels">
 				<input type="hidden" name="total_contacts" id="total_contacts">
 				<input type="hidden" name="all_cels" id="all_cels">
+				<input type="hidden" name="all_emails" id="all_emails">
 			</form>
 		</div>
 	</div>
@@ -454,6 +455,35 @@
 
     // pagefunction
     var nroFilaContacto = 2;
+    $(document).on("click",".addEmail",function(event){
+   		//console.log("DATA OWNER : "+$(this).data('owner'));
+   		let data_owner = $(this).data("owner");
+   		console.log(data_owner);
+   		data_owner = data_owner.toString();
+   		$(this).before("<input type='text' name='telefonoContacto[]' class='form-control inEmail' data-owner='"+data_owner+"' />");
+   		//let arr = $("#filaContacto[data-nro="+data_owner+"]").children().eq(5); 
+   		let arr = $("#filaContacto"+data_owner+"").children().eq(7); 
+   		   		data_owner = data_owner.toString();
+
+   		//Obtiene el TD en la posición de Teléfono
+   		//console.log("etiqueta : "+arr[0].tagName);
+   		//console.log("etiqueta : "+$(arr).prop("tagName"));
+
+   		//Obtiene el DIV dentro del TD Teléfono
+   		//let arr2 = $(arr).children().filter(":not(input[type=text])");
+   		let arr2 = $(arr).children().filter("div");
+   		//Obtiene los inputs dentro del DIV dentro del TD Telefono
+   		let arr3 = $(arr2).children().filter("input");
+		jQuery.each(arr3,function(index,value){
+   			//console.log("index : "+index+"\t valor : "+value.tagName+"\t valor input : "+value.value);
+   		});
+   		/*jQuery.each(arr2,function(index,value){
+   			console.log("index : "+index+"\t valor : "+value.tagName);
+   		});*/
+   		/*jQuery.each(arr,function(index,value){
+   			console.log("index : "+index+"\t valor : "+value.tagName);
+   		});*/
+   	});
    	$(document).on("click",".addTel",function(event){
    		//console.log("DATA OWNER : "+$(this).data('owner'));
    		let data_owner = $(this).data("owner");
@@ -518,7 +548,9 @@
    	$(document).on("click",".delCel",function(event){
 		$(event.target).prev().prev().remove();
    	});
-   	
+   	$(document).on("click",".delEmail",function(event){
+		$(event.target).prev().prev().remove();
+   	});
     /*$("#btnDelTel").click(function(){
     	var last = $("#telefonos input:last");
     	last.remove();
@@ -528,11 +560,18 @@
     $("#next").click(function(){
     	let hijosTel = $("#tablaDataContacto").find(".inTel");
     	let hijosCel = $("#tablaDataContacto").find(".inCel");
+    	let hijosEma = $("#tablaDataContacto").find(".inEmail");
     	let nro_contactos = $("#tablaDataContacto .filaContact").length;
     	$("#total_contacts").val(nro_contactos);
     	let get_all_tels = "";
     	let get_all_cels = "";
+    	let get_all_emails = "";
     	let ind;
+    	jQuery.each(hijosEma, function(index,value){
+    		//console.log("index : "+index+"\t valor : "+value.value+"\t owner : "+$(value).data('owner'));
+    		//ind = $(value).data('owner');
+    		get_all_emails += $(value).data('owner')+"#"+value.value+":";
+    	});
     	jQuery.each(hijosTel, function(index,value){
     		//console.log("index : "+index+"\t valor : "+value.value+"\t owner : "+$(value).data('owner'));
     		//ind = $(value).data('owner');
@@ -546,6 +585,7 @@
     	console.log(get_all_cels);
     	$("#all_tels").val(get_all_tels);
     	$("#all_cels").val(get_all_cels);
+    	$("#all_emails").val(get_all_emails);
     	//console.log(get_all_tels);
     	$.post("/logistica/proveedores/mantenimiento/guardar",$("#formu").serialize(), function(data){
     			alert(data);
@@ -603,7 +643,7 @@
     		let nro = nroFilaContacto++;
     		nro = nro.toString();
     		console.log(nro);
-    		let html = '<tr id="filaContacto'+nro+'" class="filaContact">								<td><input type="text" name="nombreContacto[]" class="form-control" /></td>								<td><input type="text" name="apellidoPaternoContacto[]" class="form-control" /></td>								<td><input type="text" name="apellidoMaternoContacto[]" class="form-control" /></td><td>									<select class="form-control cmbArea">										<option value="0">Seleccionar una opción</option>										<option value="1">GERENCIA</option>										<option value="2">CRÉDITO Y COBRANZAS</option>										<option value="3">CONTABILIDAD Y FINANZAS</option>										<option value="4">OPERACIONES</option>										<option value="5">LOGISTICA</option>										<option value="6">VENTAS</option>										<option value="7">ADMINISTRACION</option>										<option value="8">FINANZAS</option>										<option value="9">MANTENIMIENTO</option>										<option value="10">RECURSOS HUMANOS</option>										<option value="11">LEGAL</option>										<option value="12">SISTEMAS</option>										<option value="13">LAVADO</option>									</select>								</td>								<td class="filaComboCargo">									<select class="form-control cmbCargo" disabled="disabled">										<option value="0">Seleccionar una opción</option>									</select>								</td>								<td id="tel_numeros"><div id="telefono"><input type="text" name="telefonoContacto[]" data-owner="'+nro+'" class="form-control inTel" /><button type="button" class="addTel"  data-owner="'+nro+'"><i class="glyphicon glyphicon-plus"/></button><button type="button"  class="delTel"  data-owner="'+nro+'"><i class="glyphicon glyphicon-minus"/></button></div></td>								<td id="cel_numeros"><div id="celular"><input type="text" name="celularContacto[]" data-owner="'+nro+'" class="form-control inCel" /> <button type="button" class="addCel"  data-owner="'+nro+'"><i class="glyphicon glyphicon-plus"/></button><button type="button" class="delCel" data-owner="'+nro+'"><i class="glyphicon glyphicon-minus"/></button> </div></td>								<td><input type="text" name="emailContacto[]"  class="form-control" /></td>								<td>									<button type="button" class="btn btn-danger btnEliminarFila">										<span class="glyphicon glyphicon-trash"></span>									</button>								</td>							</tr>'
+    		let html = '<tr id="filaContacto'+nro+'" class="filaContact">								<td><input type="text" name="nombreContacto[]" class="form-control" /></td>								<td><input type="text" name="apellidoPaternoContacto[]" class="form-control" /></td>								<td><input type="text" name="apellidoMaternoContacto[]" class="form-control" /></td><td>									<select class="form-control cmbArea">										<option value="0">Seleccionar una opción</option>										<option value="1">GERENCIA</option>										<option value="2">CRÉDITO Y COBRANZAS</option>										<option value="3">CONTABILIDAD Y FINANZAS</option>										<option value="4">OPERACIONES</option>										<option value="5">LOGISTICA</option>										<option value="6">VENTAS</option>										<option value="7">ADMINISTRACION</option>										<option value="8">FINANZAS</option>										<option value="9">MANTENIMIENTO</option>										<option value="10">RECURSOS HUMANOS</option>										<option value="11">LEGAL</option>										<option value="12">SISTEMAS</option>										<option value="13">LAVADO</option>									</select>								</td>								<td class="filaComboCargo">									<select class="form-control cmbCargo" disabled="disabled">										<option value="0">Seleccionar una opción</option>									</select>								</td>								<td id="tel_numeros"><div id="telefono"><input type="text" name="telefonoContacto[]" data-owner="'+nro+'" class="form-control inTel" /><button type="button" class="addTel"  data-owner="'+nro+'"><i class="glyphicon glyphicon-plus"/></button><button type="button"  class="delTel"  data-owner="'+nro+'"><i class="glyphicon glyphicon-minus"/></button></div></td>								<td id="cel_numeros"><div id="celular"><input type="text" name="celularContacto[]" data-owner="'+nro+'" class="form-control inCel" /> <button type="button" class="addCel"  data-owner="'+nro+'"><i class="glyphicon glyphicon-plus"/></button><button type="button" class="delCel" data-owner="'+nro+'"><i class="glyphicon glyphicon-minus"/></button> </div></td>								<td id="correos"><div id="correo"><input type="text" name="emailContacto[]"  class="form-control inEmail" data-owner="'+nro+'"/><button type="button" class="addEmail"  data-owner="'+nro+'"><i class="glyphicon glyphicon-plus"/></button><button type="button" class="delEmail" data-owner="'+nro+'"><i class="glyphicon glyphicon-minus"/></button></div></td>								<td>									<button type="button" class="btn btn-danger btnEliminarFila">										<span class="glyphicon glyphicon-trash"></span>									</button>								</td>							</tr>'
     		$('#tablaData'+ref).append(html);
     	});
     	$("tbody").on("change",".cmbArea",function() {

@@ -56,6 +56,41 @@ class ProveedoresController extends Controller{
     	return view("logistica/proveedores/nuevo",$datos);
     }
     public function guardar(Request $request){
+        //OBTENER EMAILS INDIVIDUALMENTE
+        $all_emails =  $request->input("all_emails");
+        //print_r($all_emails);
+        $re = '/\d\#\w+\w\:/m';
+        preg_match_all($re, $all_emails, $matches, PREG_SET_ORDER, 0);
+        $n = "";
+        foreach ($matches as $key => $value) {
+            $value[0] = preg_replace("/#\w+\w:/m", "", strval($value[0]));
+            $n = $n.strval($value[0]);
+        }
+
+        $emails_x_con = array();
+        for($q = 1 ; $q <= strlen($n); $q++){
+            array_push($emails_x_con, substr_count($n, $q));
+        }
+       array_pop($emails_x_con);
+       //print_r($emails_x_con);
+       //exit();
+        $reg = '/\w+\w/m';
+        preg_match_all($reg, $all_emails, $emails, PREG_SET_ORDER, 0);        
+        $every_email = array();
+        foreach ($emails as $key => $value) {
+            array_push($every_email, $value[0]);
+        }
+        $c = 0;
+        $cont_with_email = array();
+        for($i = 0; $i < $request->input("total_contacts") ; $i++){
+            $emailxcon = "";
+            for($k=0;$k<$emails_x_con[$i];$k++){
+                $emailxcon = $emailxcon.strval($every_email[$c]).".";
+                $c++;
+            }
+            array_push($cont_with_email, $emailxcon);
+        }
+   
         //OBTENER CELUALRES INDIVIDUALMENTE
         $all_cels =  $request->input("all_cels");
         $re = '/\d\.\d+\d\:/m';
